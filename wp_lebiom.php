@@ -4,11 +4,11 @@ use boctulus\SW\core\Router;
 use boctulus\SW\core\FrontController;
 
 /*
-	Plugin Name: WP RUNA
-	Description: WordPress-RUNA connector
+	Plugin Name: Wp Lebiom
+	Description: Soluciones para Lebiom .com
 	Version: 0.0.1
-	Author: boctulus
-*/
+	Author: Pablo Bozzolo < boctulus@gmail.com >
+*/ 
 
 if ( ! defined( 'ABSPATH' ) ) {
     exit; // Exit if accessed directly
@@ -25,14 +25,6 @@ db_errors(false);
 
 require_once __DIR__ . '/main.php';
 
-/*
-    Con esto puedo hacer endpoints donde podre acceder a funciones de WooCommerce directa o indirectamente
-
-    Ej:
-
-    get_header()
-	get_footer()
-*/
 
 add_action('wp_loaded', function(){
     if (defined('WC_ABSPATH') && !is_admin())
