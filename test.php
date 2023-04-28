@@ -1,17 +1,8 @@
 <?php
 
-use boctulus\SW\core\libs\Url;
-use boctulus\SW\core\libs\XML;
-use boctulus\SW\core\libs\Cart;
-use boctulus\SW\core\libs\Date;
-use boctulus\SW\core\libs\Files;
-use boctulus\SW\core\libs\Taxes;
 use boctulus\SW\core\libs\Logger;
 use boctulus\SW\core\libs\Products;
-use boctulus\SW\core\libs\ApiClient;
-use boctulus\SW\core\libs\Validator;
-use boctulus\SW\core\libs\Plugins;
-use boctulus\SW\core\libs\ValidationRules;
+
 
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
@@ -32,4 +23,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 /////////////////////////////////////////////////
 
+
+
+
+dd('done');
 

@@ -8,6 +8,6 @@ use boctulus\SW\core\libs\Request;
 class TestController
 {
     function index(){
-        dd(Taxes::VATapplied(), 'IVA?');
+        dd('Hello World');
     }
 }

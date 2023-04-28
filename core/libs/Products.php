@@ -253,13 +253,13 @@ class Products
     */
     static function setHighAvailability($pid = null){
         if ($pid == null){
-            $pids = Products::getIDs();
+            $pids = static::getIDs();
         } else {
             $pids = [ $pid ];
         }
 
         foreach($pids as $pid){
-            Products::setStock($pid, 9999);
+            static::setStock($pid, 9999);
         }   
     }
 

@@ -7,5 +7,6 @@
 */
 
 return [
-    '/cart/quote'  => 'boctulus\SW\controllers\CartController@save_form',
+    'PATCH:/api/checkout/country'  => 'boctulus\SW\controllers\api\CheckoutController@update_country',
+    //'/cart/quote'  => 'boctulus\SW\controllers\CartController@save_form',
 ];

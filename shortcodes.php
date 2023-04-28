@@ -3,13 +3,11 @@
 use boctulus\SW\core\libs\Cart;
 
 
-// shortcode [runa-cotizador]
-function runa_cotizador()
+// shortcode [my_sc]
+function my_sc()
 {
-    $items = Cart::getItems();
-
-    view('cotizador', ['items' => $items]);
+   view('my_sc_view');
 }
 
 
-add_shortcode('runa-cotizador', 'runa_cotizador');
+add_shortcode('my_sc', 'my_sc');
