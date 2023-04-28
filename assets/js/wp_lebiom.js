@@ -4,9 +4,9 @@
     Podria enviar al backend la localizacion
 */
 
-get_geolocation_2().then((ubicacion) => {
+//get_geolocation().then((ubicacion) => {
     // console.log(ubicacion);
-});
+//});
 
 
 /*
@@ -15,6 +15,11 @@ get_geolocation_2().then((ubicacion) => {
     Trabaja con CheckoutController@update_country
 */
 const update_country = function(country_code){
+    // jQuery('#billing_country').val('US') 
+    // jQuery('input#billing_city').val('Florida')
+    // jQuery('#billing_postcode').val(33101) 
+
+    // jQuery('#select2-billing_state-container').text()   // Jalisco
     
     const countries_list = {
         "es" : "España",
@@ -22,6 +27,7 @@ const update_country = function(country_code){
         "co" : "Colombia",
         "mx" : "México",
         "us" : "Estados Unidos"
+        // ....
     }
 
     country_code = country_code.toUpperCase()
