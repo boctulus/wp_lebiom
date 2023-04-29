@@ -40,81 +40,52 @@ function assets(){
 enqueue('assets');
 
 
+add_filter( 'woocommerce_available_payment_gateways', 'payment_gateway_disable_country' );
+  
+function payment_gateway_disable_country( $available_gateways ) {
+    if ( is_admin() ) return $available_gateways;
+
+    $countries_payment_methods = [
+        'US' => [
+            'stripe'
+        ],
+
+        'MX' => [
+            'stripe_cc',
+            'stripe_oxxo',
+            'yith_pos_cash_gateway',
+            'bacs',
+            'cod'
+        ]
+    ];
+
+    $country = WC()->customer->get_billing_country() ?? null;
+
+    foreach($countries_payment_methods as $ctry => $av_pm){
+        if ($ctry != $country){
+            foreach ($av_pm as $pm){
+
+                //dd("Anulando ...  $pm");
+            
+                if (isset($available_gateways[$pm])){
+                    unset($available_gateways[$pm] );
+                }
+    
+            }
+        }       
+    }
+   
+
+    return $available_gateways;
+}
+
+
+
 add_action( 'woocommerce_checkout_before_order_review', 'my_custom_checkout_js' );
 
 function my_custom_checkout_js() {
     ?>
     <script>
-
-        let country;
-        
-        /*
-            Debende de como este configurado y plugins instalados
-        */
-        const payment_methods_by_country = {
-            'US' : [
-                'stripe'
-            ],
-
-            'MX' : [
-                'stripe_cc',
-                'stripe_oxxo',
-                'yith_pos_cash_gateway',
-                'bacs',
-                //'cod'
-            ]
-        }
-
-        /*
-            payment_method seria algo como
-
-            stripe                -US-
-            stripe_cc             -MX-
-            stripe_oxxo           -MX-
-            yith_pos_cash_gateway -MX-
-            bacs (transferencia)  -MX-
-
-            cod (contra re-embolso)
-        */
-        const hide_payment = (payment_method) => {
-            let __class = `.payment_method_${payment_method}`;
-            
-            //console.log('HIDDING .... ' + __class);
-            jQuery(__class).remove()
-        }
-
-
-        window.addEventListener("DOMContentLoaded", (event) => {            
-           
-            setTimeout(() => {  
-                //console.log('HIDDING ....');
-
-                country = jQuery('#billing_country').val();
-
-                switch(country){
-                    case 'MX':
-                        hide_payment('stripe')
-                        break;
-                    case 'US':
-                        hide_payment('stripe_cc')
-                        hide_payment('stripe_oxxo')
-                        hide_payment('yith_pos_cash_gateway')
-                        hide_payment('bacs')
-                        hide_payment('cheque')
-                        hide_payment('cod')
-                        break;
-
-                    default:
-                        hide_payment('stripe')
-                        hide_payment('stripe_cc')
-                        hide_payment('stripe_oxxo')
-                        hide_payment('yith_pos_cash_gateway')
-                        hide_payment('bacs')
-                        hide_payment('cheque')
-                        hide_payment('cod')
-                 }
-            }, 1000)
-        });
 
     </script>
     <?php
@@ -124,10 +95,6 @@ function my_custom_checkout_js() {
 add_action('wp_loaded', function(){
     if (defined('WC_ABSPATH') && !is_admin())
 	{
-        $country = WC()->customer->get_billing_country();
-
-        dd($country, 'COUNTRY');
+        // ..
     }    
 });
-
-
