@@ -1,5 +1,6 @@
 <?php
 
+use boctulus\SW\core\libs\Url;
 use boctulus\SW\core\libs\Page;
 use boctulus\SW\core\libs\Taxes;
 use boctulus\SW\core\libs\Users;
@@ -43,7 +44,20 @@ enqueue('assets');
 add_filter( 'woocommerce_available_payment_gateways', 'payment_gateway_disable_country' );
   
 function payment_gateway_disable_country( $available_gateways ) {
-    if ( is_admin() ) return $available_gateways;
+    if ( is_admin() ){
+        return $available_gateways;
+    } 
+
+    /*
+        Para pruebas
+    */
+
+    $ip = Url::ip();
+
+    if ($ip == '158.62.20.172' || $ip == '127.0.0.1'){
+        return $available_gateways;
+    }
+
 
     Logger::truncate();
     Logger::dump([ "GATEWAYS DISPONIBLES" => $available_gateways ]);
