@@ -45,6 +45,9 @@ add_filter( 'woocommerce_available_payment_gateways', 'payment_gateway_disable_c
 function payment_gateway_disable_country( $available_gateways ) {
     if ( is_admin() ) return $available_gateways;
 
+    Logger::truncate();
+    Logger::dump([ "GATEWAYS DISPONIBLES" => $available_gateways ]);
+
     $countries_payment_methods = [
         'US' => [
             'stripe'
@@ -65,7 +68,7 @@ function payment_gateway_disable_country( $available_gateways ) {
         if ($ctry != $country){
             foreach ($av_pm as $pm){
 
-                //dd("Anulando ...  $pm");
+                Logger::dd("Anulando ...  $pm", "GATEWAY X");
             
                 if (isset($available_gateways[$pm])){
                     unset($available_gateways[$pm] );

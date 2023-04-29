@@ -35,10 +35,10 @@ class VarDump
 
 		$pre = !$cli;	
 
-		if ($postman || $type != 'array'){
+		if ($postman || ($type != 'array' && !Strings::startsWith('array (', $v) )){
 			$pre = false;
 		}
-		
+
 		$fn = function($x) use ($type, $postman, $pre){
 			$pp = function ($fn, $dato) use ($pre){
 				if ($pre){

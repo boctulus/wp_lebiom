@@ -1,7 +1,9 @@
 <?php
 
 use boctulus\SW\core\Router;
+use boctulus\SW\core\libs\Files;
 use boctulus\SW\core\FrontController;
+
 
 /*
 	Plugin Name: Wp Lebiom
@@ -18,6 +20,14 @@ require_once __DIR__ . '/app.php';
 
 
 register_activation_hook( __FILE__, function(){
+	$log_dir = __DIR__ . '/logs';
+	
+	if (is_dir($log_dir)){
+		Files::globDelete($log_dir);
+	} else {
+		Files::mkdir($log_dir);
+	}
+
 	require_once __DIR__ . '/on_activation.php';
 });
 

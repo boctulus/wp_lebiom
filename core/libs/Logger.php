@@ -109,8 +109,8 @@ class Logger
 		}		
 	}
 
-	static function dd($data, $msg, bool $append = true){
-		static::log([$msg => $data], null, $append);
+	static function dd($data, $msg = null, bool $append = true){
+		static::log(!empty($msg) ? [ $msg => $data ] : $data, null, $append);
 	}
 
 	static function logError($error){
