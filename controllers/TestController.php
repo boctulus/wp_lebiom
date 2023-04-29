@@ -9,6 +9,10 @@ use boctulus\SW\core\libs\Request;
 class TestController
 {
     function index(){
+        
+    }
+
+    function ip(){
         dd(
             Url::ip()
         );
